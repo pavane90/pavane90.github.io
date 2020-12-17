@@ -1,0 +1,85 @@
+<link rel="stylesheet" type="text/css" href="css/theme.css" />
+<script
+  type="text/javascript"
+  src="se2/js/service/HuskyEZCreator.js"
+  charset="utf-8"
+></script>
+<script
+  type="text/javascript"
+  src="se2/js/jquery.min.js"
+  charset="utf-8"
+></script>
+<script
+  type="text/javascript"
+  src="se2/js/lib/jindo2.all.js"
+  charset="utf-8"
+></script>
+<script
+  type="text/javascript"
+  src="se2/js/lib/jindo_component.js"
+  charset="utf-8"
+></script>
+<script
+  type="text/javascript"
+  src="se2/js/service/SE2M_Configuration.js"
+  charset="utf-8"
+></script>
+<script
+  type="text/javascript"
+  src="se2/js/service/SE2BasicCreator.js"
+  charset="utf-8"
+></script>
+<script
+  type="text/javascript"
+  src="se2/js/smarteditor2.js"
+  charset="utf-8"
+></script>
+
+<h1>Link 😀</h1>
+<div id="global-wrap">
+  <div class="left-area">
+    <textarea name="ir1" id="ir1" rows="10" cols="100"></textarea>
+  </div>
+  <div class="right-area">
+    <div class="right-area-top">
+      <p>검색할 단어</p>
+      <input type="text" id="searchKeyword" />
+    </div>
+    <div class="right-area-mid">
+      <p>추가할 URL</p>
+      <input type="text" id="addURL" />
+    </div>
+    <div class="right-area-bottom">
+      <input type="button" onclick="showHTML()" value="변환" />
+      <p><strong id="result"></strong></p>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var oEditors = [];
+  nhn.husky.EZCreator.createInIFrame({
+    oAppRef: oEditors,
+    elPlaceHolder: "ir1",
+    sSkinURI: "se2/SmartEditor2Skin.html",
+    fCreator: "createSEditor2",
+  });
+
+  function showHTML() {
+    oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+
+    const original = document.getElementById("ir1").value;
+    const s = document.getElementById("searchKeyword").value;
+
+    const url = document.getElementById("addURL").value;
+
+    const u = "<a href=" + url + ">" + s + "</a>";
+    //init
+    oEditors.getById["ir1"].exec("SET_IR", [""]);
+    //update
+    oEditors.getById["ir1"].exec("PASTE_HTML", [original.replaceAll(s, u)]);
+
+    const complete = document.getElementById("result");
+    complete.innerHTML = "변환이 완료되었습니다";
+  }
+</script>

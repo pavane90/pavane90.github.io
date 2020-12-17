@@ -1,0 +1,33 @@
+html,
+body {
+  height: 100%;
+  background-color: #bdbdbd;
+}
+
+body {
+  display: table;
+  margin: 0 auto;
+}
+
+#global-wrap {
+  display: flex;
+  justify-content: center;
+  background-color: #f5f5f5;
+  padding: 24px;
+  margin-top: 48px;
+  border-radius: 8px;
+}
+
+.left-area {
+  width: 724px;
+}
+
+.right-area {
+  padding-left: 16px;
+}
+
+.right-area-bottom input {
+  margin-top: 48px;
+  width: 178px;
+  height: 48px;
+}
